@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const email = ref('')
+const userName = ref('')
 const password = ref('')
 const error = ref('')
 const loading = ref(false)
@@ -12,7 +12,7 @@ const submit = async () => {
 
   const { data, error: err } = await useFetch('/api/login', {
     method: 'POST',
-    body: { email: email.value, password: password.value }
+    body: { userName: userName.value, password: password.value }
   })
 
   loading.value = false
@@ -30,14 +30,25 @@ const submit = async () => {
     <form @submit.prevent="submit" class="bg-white p-6 rounded shadow w-80">
       <h1 class="text-xl font-bold mb-4">Iniciar Sesión</h1>
 
-      <input v-model="email" type="text" placeholder="Email"
-        class="w-full mb-3 px-3 py-2 border rounded" />
+      <input
+        v-model="userName"
+        type="text"
+        placeholder="Usuario"
+        class="w-full mb-3 px-3 py-2 border rounded"
+      />
 
-      <input v-model="password" type="password" placeholder="Contraseña"
-        class="w-full mb-3 px-3 py-2 border rounded" />
+      <input
+        v-model="password"
+        type="password"
+        placeholder="Contraseña"
+        class="w-full mb-3 px-3 py-2 border rounded"
+      />
 
-      <button :disabled="loading" type="submit"
-        class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
+      <button
+        :disabled="loading"
+        type="submit"
+        class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+      >
         {{ loading ? 'Cargando...' : 'Entrar' }}
       </button>
 

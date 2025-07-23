@@ -1,17 +1,15 @@
-import { MongoClient } from 'mongodb';
+// server/utils/mongo.ts
+import { MongoClient } from 'mongodb'
 
-const uri = 'mongodb://localhost:27017'; // tu conexión local o de Atlas
-const dbName = 'neural-crm'; // el nombre de tu base
+const uri = process.env.MONGODB_URI || ''
+if (!uri) throw new Error('Falta la variable de entorno MONGODB_URI')
 
-let cachedClient: MongoClient | null = null;
+const client = new MongoClient(uri)
+const dbName = 'tu_basedatos' // ← reemplaza con el nombre real de tu base
 
-export async function connectToDB() {
-  if (cachedClient) {
-    return cachedClient.db(dbName);
+export async function connectToDatabase() {
+  if (!client.isConnected?.()) {
+    await client.connect()
   }
-
-  const client = await MongoClient.connect(uri);
-  cachedClient = client;
-
-  return client.db(dbName);
+  return client.db(dbName)
 }
