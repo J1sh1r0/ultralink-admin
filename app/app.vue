@@ -4,4 +4,5 @@ import { NuxtPage } from '#components';
 
 <template>
   <NuxtPage />
+  <NuxtLayout />
 </template>
