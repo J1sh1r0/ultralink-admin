@@ -1,5 +1,4 @@
-// server/api/login.ts
-import { connectToDatabase } from '~/server/utils/mongo'
+import { connectToDatabase } from '../utils/mongo'
 import bcrypt from 'bcryptjs'
 import { H3Event, readBody } from 'h3'
 

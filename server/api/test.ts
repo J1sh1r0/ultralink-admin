@@ -1,12 +1,12 @@
-import { connectToDB } from '../utils/mongo';
+import { connectToDatabase } from '../utils/mongo'
 
 export default defineEventHandler(async (event) => {
-  const db = await connectToDB();
+  const db = await connectToDatabase()
 
-  const collections = await db.listCollections().toArray();
+  const collections = await db.listCollections().toArray()
 
   return {
     message: 'Conexión exitosa',
-    collections: collections.map(c => c.name)
-  };
-});
+    collections: collections.map(c => c.name),
+  }
+})
